@@ -1,0 +1,95 @@
+{% extends 'app.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock estilos %}
+    
+
+{% block content %}
+<header class="p-3 text-bg-dark shadow">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'gestion_administrador' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none mx-3">
+          <img src="{% static 'img/brand.png' %}" class="img-fluid me-2" alt="" width="180">
+        </a>
+  
+        <ul class="ms-5 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        </ul>
+          <p class="nav-link px-2 text-white mt-3 mx-3">Bienvenido a Neteams | Administrador:   <span class="fw-bolder">{{username}}</span></p>
+          <a name="" id="adders" class="btn btn-primary" href="{% url 'cerrar_sesion' %}" role="button"><i class="fa-solid fa-right-from-bracket text-white me-3"></i>Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary p-3 m-4 fs-6" data-bs-toggle="modal" id="adders" data-bs-target="#staticBackdrop">
+      <i class="fa-solid fa-notes-medical text-white mx-3 "></i>Añadir Tarea
+    </button>
+    <hr>
+    <h1 class="text-center fw-bolder mb-3 fs-1 my-4">Listado de Tareas </h1>
+    <table class="table table-dark table-striped rounded" style="width: 95%;margin: auto; border-radius: 20px;">
+      <thead class="table-bordered border-dark">
+          <tr>
+              <th class="fw-bolder fs-6 px-4">#</th>
+              <th class="fw-bolder fs-6">Nombre</th>
+              <th class="fw-bolder fs-6">Descripción</th>
+              <th class="fw-bolder fs-6">Plazo Máximo</th>
+              <th class="fw-bolder fs-6">Fecha de Creación</th>
+              <th class="fw-bolder fs-6">Empleado Encargado</th>
+              <th class="fw-bolder fs-6">Completado</th>
+              <th class="fw-bolder fs-6">Acciones</th>
+          </tr>
+      </thead>
+      {% for tarea in tareas %}
+      <tbody>
+          <tr class="table-bordered border-dark">
+              <td class="fw-bolder px-4">{{ tarea.id }}</td>
+              <td class="fw-bolder">{{ tarea.nombre }}</td>
+              <td class="fw-bolder">{{ tarea.descripcion }}</td>
+              <td class="fw-bolder">{{ tarea.plazo_maximo }}</td>
+              <td class="fw-bolder">{{ tarea.created_at|date:'d F' }}</td>
+              <td class="fw-bolder">{{ tarea.empleado }}</td>
+              <td class="fw-bolder {% if tarea.completado %} text-info{% else %} text-warning{% endif %}">{% if tarea.completado %} Si {% else %} No{% endif %}</td>
+              <td class="fw-bolder">
+                  <a href="{% url 'editar_tarea' tarea.id %}" class="btn btn-success mb-1"><i class="bi bi-pencil-square text-white"></i></a>
+                  <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn btn-danger mb-1"><i class="bi bi-trash-fill text-white"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  
+
+
+
+
+    
+    <!-- Modal -->
+    <form action="" method="post">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bolder" id="staticBackdropLabel">Formulario para añadir tarea.</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{tarea_form|crispy}}
+                </div>
+                <div class="modal-footer">
+                <button type="submit" id="adders"class="btn btn-secondary">Añadir</button>
+                <button type="button" id="adders1" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'app.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock estilos %}
+    
+
+{% block content %}
+<header class="p-3 text-bg-dark shadow">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'gestion_administrador' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none mx-3">
+          <img src="{% static 'img/brand.png' %}" class="img-fluid me-2" alt="" width="180">
+        </a>
+  
+        <ul class="ms-5 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        </ul>
+          <p class="nav-link px-2 text-white mt-3 mx-3">Bienvenido a Neteams | Administrador:   <span class="fw-bolder">{{username}}</span></p>
+          <a name="" id="adders" class="btn btn-primary" href="{% url 'cerrar_sesion' %}" role="button">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <form action="" method="post">
+        <div class="card w-50 m-auto my-5 shadow p-5">
+            {% csrf_token %}
+            <h1 class="fw-bolder text-center my-3">Editar Tarea</h1>
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary my-4" id="adders">Actualizar</button>
+            <a name="" id=""  style="font-size: 14px;"class="text-primary text-decoration-underline m-auto" href="{% url 'gestion_administrador' %}" role="button"><i class="fa-regular fa-circle-left me-2"></i>Volver</a>
+        </div>
+      </form>
+  </div>
+{% endblock %}

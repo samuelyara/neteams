@@ -1,0 +1,45 @@
+{% extends 'app.html' %}
+{% load static %}
+
+
+{% block title %}
+Ingreso Usuarios | Inventario
+{% endblock title %}
+{% block content %}
+
+
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock estilos %}
+
+{% load crispy_forms_tags %}
+
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+    
+    /* Estilos para centrar el formulario */
+    .centered-form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
+
+<div class="centered-form">
+    <div class="card w-50 shadow">
+        <h1 class="mt-5 text-center green fw-bolder">Sistema de Ingreso</h1>
+        <div class="card-body p-5">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary my-3 w-100 shadow" id="adders" >Ingresar</button>
+                {{rol}}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

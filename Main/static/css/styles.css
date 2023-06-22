@@ -1,0 +1,46 @@
+.anavlink{
+    color: #00BF63; 
+}
+
+/* Botones de Sesion */
+
+#adders{
+    background-color: #00BF63;
+    color: white;
+    border-radius: 15px;
+    border: #001b0e;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+#adders1{
+    background-color: #ffffff;
+    color: #181818;
+    border-radius: 20px;
+    border: #001b0e;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+#hovul:hover{
+    color: #00ff84;
+}
+
+.green{
+    color: #00BF63;
+    font-weight: bolder;
+}
+
+h1{
+    font-weight: 600;
+}
+
+
+i{
+    color: #00BF63;
+    font-weight: bolder;
+}
